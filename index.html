@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .payment-methods {
+            padding: 30px;
+        }
+
+        .method {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .method-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .dana { background-color: #04b1f9; }
+        .gopay { background-color: #00aa13; }
+        .ovo { background-color: #4c2b87; }
+        .qris { background-color: #333; }
+
+        .method-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .method-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .payment-details {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .payment-number {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .payment-number:last-child {
+            border-bottom: none;
+        }
+
+        .payment-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .payment-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            word-break: break-all;
+            text-align: right;
+            margin-left: 10px;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .qris-image {
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            margin: 15px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .qris-image:hover {
+            transform: scale(1.03);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .payment-methods {
+                padding: 20px;
+            }
+            
+            .method {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Payment Gateway</h1>
+            <p>Choose your preferred payment method</p>
+        </div>
+        
+        <div class="payment-methods">
+            <!-- DANA Payment Method -->
+            <div class="method">
+                <div class="method-header">
+                    <div class="method-icon dana">
+                        D
+                    </div>
+                    <div class="method-title">DANA</div>
+                </div>
+                <p class="method-desc">Transfer to DANA mobile number</p>
+                <div class="payment-details">
+                    <div class="payment-number">
+                        <span class="payment-label">DANA Number:</span>
+                        <span class="payment-value">087817757895</span>
+                        <button class="copy-btn" onclick="copyToClipboard('087817757895')">Copy</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gopay Payment Method -->
+            <div class="method">
+                <div class="method-header">
+                    <div class="method-icon gopay">
+                        G
+                    </div>
+                    <div class="method-title">Gopay</div>
+                </div>
+                <p class="method-desc">Transfer to Gopay mobile number</p>
+                <div class="payment-details">
+                    <div class="payment-number">
+                        <span class="payment-label">Gopay Number:</span>
+                        <span class="payment-value">087817757895</span>
+                        <button class="copy-btn" onclick="copyToClipboard('087817757895')">Copy</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- OVO Payment Method -->
+            <div class="method">
+                <div class="method-header">
+                    <div class="method-icon ovo">
+                        O
+                    </div>
+                    <div class="method-title">OVO</div>
+                </div>
+                <p class="method-desc">Transfer to OVO mobile number</p>
+                <div class="payment-details">
+                    <div class="payment-number">
+                        <span class="payment-label">OVO Number:</span>
+                        <span class="payment-value">087817757895</span>
+                        <button class="copy-btn" onclick="copyToClipboard('087817757895')">Copy</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- QRIS Payment Method -->
+            <div class="method">
+                <div class="method-header">
+                    <div class="method-icon qris">
+                        Q
+                    </div>
+                    <div class="method-title">QRIS</div>
+                </div>
+                <p class="method-desc">Scan the QR code below to pay</p>
+                <div class="payment-details">
+                    <img src="https://files.catbox.moe/fv1pan.jpg" alt="QRIS Code" class="qris-image">
+                    <div style="text-align: center;">
+                        <button class="copy-btn" onclick="copyToClipboard('https://files.catbox.moe/fv1pan.jpg')" style="margin: 0 auto;">Copy QR Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>After payment, please confirm with your payment receipt</p>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Copied to clipboard: ' + text);
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
