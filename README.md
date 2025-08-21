@@ -1,1 +1,1 @@
-# web-payment
+https://whatsapp.com/channel/0029VbBJVvy7dmecEyLn7H3K
